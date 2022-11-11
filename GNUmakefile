@@ -22,7 +22,7 @@ GDB := "/bin/gdb"
 CMDNEWSCREEN := cmd.out /c start cmd /c wsl -e
 MNTDIR := /mnt/personal-os
 
-WSLHOSTIP := $(shell ipconfig.exe | grep 'vEthernet (WSL)' -a -A4 | tail -n1 | cut -d":" -f 2 | tail -n1 | sed -e 's/\s*//g')
+# WSLHOSTIP := $(shell ipconfig.exe | grep 'vEthernet (WSL)' -a -A4 | tail -n1 | cut -d":" -f 2 | tail -n1 | sed -e 's/\s*//g')
 ########################################################################
 
 KERNEL_ENTRY := _start

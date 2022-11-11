@@ -31,7 +31,7 @@ uint64_t get_current_terminal() {
 }
 
 void set_terminal_writer(uint64_t terminal) {
-    if (terminal >= get_terminal_count()) {
+    if (terminal > get_terminal_count()) {
         service_error();
     }
     terminal_writer = terminal;
