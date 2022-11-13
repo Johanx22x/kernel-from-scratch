@@ -1,15 +1,9 @@
 #include "bootloader/bootservices.h"
 #include "print/printf/printf.h"
+#include "print/dbgprinter.h"
+#include "util/string.h"
+#include "memory/memory.h"
 #include <stdint.h>
-
-#define STRING_MAX_SIZE 65536
-
-uint64_t strlen(const char* str) {
-    uint64_t len = 0;
-    while (str[len] && len < STRING_MAX_SIZE)
-        len++;
-    return len;
-}
 
 void hlt() {
     while (1) {
@@ -19,5 +13,19 @@ void hlt() {
 
 void _start(void) {
     printf("Hi, I'm a kernel!\nBootloader: %s\nBootloader version: %s\n", get_bootloader_name(), get_bootloader_version());
-    hlt();
+
+    init_memory();
+
+    void * page = request_page();
+    printf("Allocated page at %p\n", page);
+
+    void * page2 = request_page();
+    printf("Allocated page at %p\n", page2);
+
+    free_page(page2);
+
+    void * page3 = request_page();
+    printf("Allocated page at %p\n", page3);
+
+    panic("Kernel looping...");
 }
